@@ -223,12 +223,12 @@ class GenerateJson extends Command
         return $array;
     }
 
-    protected function isSubscribedByOptIn($option)
+    protected function isSubscribedByOptIn($option) : bool
     {
         return $option == 'Yes' ? true : false;
     }
 
-    protected function isSubscribedByEmail($email)
+    protected function isSubscribedByEmail($email) : bool
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;
@@ -237,12 +237,12 @@ class GenerateJson extends Command
         return false;
     }
 
-    protected function getFullAddress($model)
+    protected function getFullAddress($model) : string
     {
         return $model->address1;
     }
 
-    protected function isSubscribedByAddress($fullAddress)
+    protected function isSubscribedByAddress($fullAddress) : bool
     {
         if (!empty(trim($fullAddress))) {
             return true;
@@ -251,7 +251,7 @@ class GenerateJson extends Command
         return false;
     }
 
-    protected function isSubscribedByMobile($mobileno)
+    protected function isSubscribedByMobile($mobileno) : bool
     {
         if (!empty($mobileno)) {
             return true;
@@ -260,12 +260,12 @@ class GenerateJson extends Command
         return false;
     }
 
-    protected function generatePassword()
+    protected function generatePassword() : string
     {
         return sha1(str_random());
     }
 
-    protected function validDateOfBirth(Carbon $date)
+    protected function validDateOfBirth(Carbon $date) : bool
     {
         return $date->lt($this->today) && $date->diffInYears($this->today) <= 10;
     }
